@@ -1,0 +1,13 @@
+id_cliente,segmento,valor_mensual_usd,comentario,canal
+C-101,Enterprise,1200,"El sistema es lento al exportar reportes grandes a fin de mes, nuestro equipo pierde 3 horas esperando.",Ticket Soporte
+C-102,PyME,250,"La competencia ofrece facturacion automatica incluida en el plan basico y ustedes la cobran aparte.",Encuesta NPS
+C-103,Enterprise,1500,"Necesitamos integracion directa con nuestro ERP o no podremos renovar el contrato el proximo trimestre.",Reunion Comercial
+C-104,Startup,90,"El precio subio demasiado para equipos pequenos, estamos evaluando alternativas mas economicas.",Formulario Cancelacion
+C-105,PyME,300,"El soporte tecnico tarda mas de 24 horas en responder cuando hay caidas del servicio.",Ticket Soporte
+C-106,Enterprise,1800,"Excelente plataforma, pero la exportacion de reportes falla cuando filtramos mas de 6 meses de datos.",Ticket Soporte
+C-107,PyME,280,"Si incluyeran alertas automaticas por WhatsApp pagariamos con gusto un 20% adicional en la suscripcion.",Entrevista Cliente
+C-108,Startup,95,"La interfaz de configuracion inicial es muy confusa, tardamos dos semanas en entender como cargar datos.",Encuesta Onboarding
+C-109,Enterprise,1400,"Urgente: necesitamos permisos por rol y auditoria de usuarios por normativas de seguridad interna.",Reunion Comercial
+C-110,PyME,310,"Nos encanta el producto, pero necesitamos integracion con el sistema contable para no duplicar trabajo.",Encuesta NPS
+C-111,Startup,85,"El precio del plan inicial no se justifica si no incluye soporte rapido ni plantillas preconfiguradas.",Formulario Cancelacion
+C-112,Enterprise,2100,"Si resuelven la velocidad de los reportes y agregan alertas por WhatsApp ampliaremos a 50 licencias mas.",Reunion Comercial

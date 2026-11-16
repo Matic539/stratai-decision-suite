@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Suite de decisiones estratégicas: motor de reglas de negocio + Comité Directivo de IA" />
+  <title>StratAI Decision Suite</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="/vendor/chart.umd.min.js" defer></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <header class="encabezado">
+    <div>
+      <h1>StratAI Decision Suite</h1>
+      <p class="subtitulo">Motor de reglas de negocio determinista + Comité Directivo de IA</p>
+    </div>
+    <div class="insignias">
+      <span class="insignia" id="insignia-modo">Instancia: consultando...</span>
+      <span class="insignia" id="insignia-ia">IA: consultando...</span>
+    </div>
+  </header>
+
+  <nav class="pestanas" role="tablist" aria-label="Módulos de la suite">
+    <button class="pestana" role="tab" id="pestana-simulador" aria-controls="panel-simulador" aria-selected="true">1. Simulador financiero</button>
+    <button class="pestana" role="tab" id="pestana-analizador" aria-controls="panel-analizador" aria-selected="false" tabindex="-1">2. Voz del cliente y RICE</button>
+    <button class="pestana" role="tab" id="pestana-inspector" aria-controls="panel-inspector" aria-selected="false" tabindex="-1">3. Inspector JSON y Comité IA</button>
+  </nav>
+
+  <main id="contenido">
+    <!-- ============================================================ -->
+    <!-- MÓDULO 1: SIMULADOR FINANCIERO                               -->
+    <!-- ============================================================ -->
+    <section id="panel-simulador" class="panel" role="tabpanel" aria-labelledby="pestana-simulador">
+      <div class="disposicion-simulador">
+        <form id="form-simulador" class="tarjeta formulario" novalidate>
+          <fieldset>
+            <legend>A. Métricas base del negocio</legend>
+            <label class="campo"><span>Clientes activos</span>
+              <input type="number" name="clientes" data-entrada min="1" step="1" inputmode="numeric" required /></label>
+            <label class="campo"><span>Precio mensual (USD)</span>
+              <input type="number" name="precio" data-entrada min="1" step="1" inputmode="decimal" required /></label>
+            <label class="campo"><span>Precio de la competencia (USD)</span>
+              <input type="number" name="precioCompetencia" data-entrada min="1" step="1" inputmode="decimal" required /></label>
+            <label class="campo"><span>Costo variable (% del precio)</span>
+              <input type="number" name="costoVariablePct" data-entrada min="0" max="95" step="1" inputmode="decimal" required /></label>
+            <label class="campo"><span>Costos fijos mensuales (USD)</span>
+              <input type="number" name="costosFijosMes" data-entrada min="0" step="500" inputmode="decimal" required /></label>
+            <label class="campo"><span>Costo de adquisición, CAC (USD)</span>
+              <input type="number" name="cac" data-entrada min="1" step="10" inputmode="decimal" required /></label>
+            <label class="campo"><span>Churn mensual (%)</span>
+              <input type="number" name="churnMensualPct" data-entrada min="0.5" max="50" step="0.1" inputmode="decimal" required /></label>
+            <label class="campo"><span>Clientes orgánicos por mes</span>
+              <input type="number" name="nuevosOrganicosMes" data-entrada min="0" step="1" inputmode="numeric" placeholder="automático" /></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>B. Palancas de decisión</legend>
+            <label class="campo deslizador"><span>Ajuste de precio <output id="salida-ajuste"></output></span>
+              <input type="range" name="ajustePrecioPct" data-entrada min="-25" max="40" step="1" /></label>
+            <label class="campo deslizador"><span>Presupuesto de inversión <output id="salida-presupuesto"></output></span>
+              <input type="range" name="presupuesto" data-entrada min="0" max="60000" step="500" /></label>
+            <label class="campo deslizador"><span>Reparto del presupuesto <output id="salida-reparto"></output></span>
+              <input type="range" name="pctRetencion" data-entrada min="0" max="100" step="5" /></label>
+          </fieldset>
+
+          <details class="supuestos">
+            <summary>Supuestos del modelo</summary>
+            <label class="campo"><span>Elasticidad precio</span>
+              <input type="number" name="elasticidadPrecio" data-supuesto min="0" max="3" step="0.1" inputmode="decimal" /></label>
+            <label class="campo"><span>Eficacia de la inversión en producto</span>
+              <input type="number" name="eficaciaProducto" data-supuesto min="0" max="3" step="0.1" inputmode="decimal" /></label>
+            <label class="campo"><span>Meses para repartir la adquisición</span>
+              <input type="number" name="mesesAdquisicion" data-supuesto min="1" max="12" step="1" inputmode="numeric" /></label>
+            <p class="nota">Detalle de fórmulas y calibración en <code>docs/fase1-logica-de-negocio.md</code>.</p>
+          </details>
+
+          <p id="error-simulador" class="mensaje-error" role="alert" hidden></p>
+          <button type="button" id="btn-restablecer" class="boton secundario">Restablecer caso de la clase</button>
+        </form>
+
+        <div class="resultados" id="resultados-simulador">
+          <div id="banner-iniciativa" class="banner" hidden>
+            <p>Iniciativa conectada desde la matriz RICE: <strong id="banner-titulo"></strong>.
+              Presupuesto inicial <span id="banner-costo"></span>, 80% a retención, eficacia <span id="banner-eficacia"></span>.</p>
+            <button type="button" id="btn-quitar-iniciativa" class="boton fantasma">Quitar</button>
+          </div>
+
+          <div class="kpis" id="kpis-simulador" aria-live="polite"></div>
+
+          <div class="fila-dos">
+            <section class="tarjeta" aria-labelledby="titulo-diagnostico">
+              <h2 id="titulo-diagnostico">Diagnóstico del motor de reglas</h2>
+              <ul id="lista-diagnosticos" class="diagnosticos"></ul>
+            </section>
+            <section class="tarjeta grafico" aria-labelledby="titulo-escenarios">
+              <h2 id="titulo-escenarios">Escenarios de la estrategia híbrida</h2>
+              <p class="nota">Beneficio incremental a 12 meses, re-simulado con supuestos pesimistas y optimistas.</p>
+              <div class="lienzo bajo"><canvas id="grafico-escenarios" role="img" aria-label="Beneficio incremental por escenario"></canvas></div>
+            </section>
+          </div>
+
+          <section class="tarjeta grafico" aria-labelledby="titulo-proyeccion">
+            <div class="tarjeta-cabecera">
+              <h2 id="titulo-proyeccion">Proyección a 12 meses</h2>
+              <div class="alternador" role="group" aria-label="Métrica del gráfico">
+                <button type="button" class="alternar" data-metrica="utilidadMensual" aria-pressed="true">Utilidad mensual</button>
+                <button type="button" class="alternar" data-metrica="clientes" aria-pressed="false">Clientes activos</button>
+              </div>
+            </div>
+            <div class="lienzo"><canvas id="grafico-proyeccion" role="img" aria-label="Proyección a 12 meses de los 4 caminos estratégicos. Los valores están en la tabla de comparación."></canvas></div>
+          </section>
+
+          <section class="tarjeta" aria-labelledby="titulo-caminos">
+            <h2 id="titulo-caminos">Comparación de caminos</h2>
+            <div class="tabla-desplazable"><table id="tabla-caminos" class="tabla"></table></div>
+          </section>
+
+          <details class="tarjeta" id="detalle-excel">
+            <summary>Comparar con el Excel del ramo (hoja "Dilema del Gerente")</summary>
+            <p class="nota">Mismo cálculo de la hoja 1 del Excel con tus métricas base. Costo operativo por cliente = precio × costo variable.</p>
+            <div class="tabla-desplazable"><table id="tabla-excel" class="tabla"></table></div>
+            <p id="veredicto-excel" class="veredicto"></p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- MÓDULO 2: VOZ DEL CLIENTE A MATRIZ RICE                      -->
+    <!-- ============================================================ -->
+    <section id="panel-analizador" class="panel" role="tabpanel" aria-labelledby="pestana-analizador" hidden>
+      <div class="tarjeta barra-herramientas">
+        <label class="boton" for="archivo-csv" id="etiqueta-archivo-csv">Cargar CSV</label>
+        <input type="file" id="archivo-csv" accept=".csv,text/csv" class="oculto-visual" />
+        <button type="button" id="btn-dataset" class="boton secundario">Usar datos del servidor</button>
+        <button type="button" id="btn-desafio9" class="boton secundario" title="Agrega 3 clientes Enterprise de $2,500 con quejas de seguridad (Manual Docente)">Agregar desafío 9</button>
+        <label class="campo-en-linea"><span>Ordenar por</span>
+          <select id="criterio-rice">
+            <option value="score_rice">Score RICE</option>
+            <option value="ingreso_en_riesgo_usd">Ingreso en riesgo (desafío 10)</option>
+          </select>
+        </label>
+        <span id="origen-datos" class="nota"></span>
+      </div>
+      <p id="error-csv" class="mensaje-error" role="alert" hidden></p>
+
+      <div class="kpis" id="resumen-voc" aria-live="polite"></div>
+
+      <section class="tarjeta" aria-labelledby="titulo-rice">
+        <h2 id="titulo-rice">Matriz de priorización RICE</h2>
+        <p class="nota">Score = reach × impacto × confianza / esfuerzo. Reach = clientes × 12 + ingreso en riesgo / 120. Confianza = 70% + 6% por cliente (tope 95%).</p>
+        <div class="tabla-desplazable"><table id="tabla-rice" class="tabla"></table></div>
+        <p id="aviso-sin-clasificar" class="nota alerta" hidden></p>
+        <div id="verificacion-servidor" class="verificacion" hidden></div>
+      </section>
+
+      <section class="tarjeta grafico" aria-labelledby="titulo-ingreso">
+        <h2 id="titulo-ingreso">Ingreso mensual en riesgo por iniciativa</h2>
+        <div class="lienzo"><canvas id="grafico-ingreso" role="img" aria-label="Ingreso mensual en riesgo por iniciativa. Los valores están en la matriz RICE."></canvas></div>
+      </section>
+
+      <details class="tarjeta">
+        <summary>Agregar un comentario de cliente</summary>
+        <form id="form-comentario" class="formulario-comentario" novalidate>
+          <label class="campo"><span>ID cliente</span><input name="id_cliente" maxlength="20" required placeholder="C-200" /></label>
+          <label class="campo"><span>Segmento</span>
+            <select name="segmento"><option>Enterprise</option><option>PyME</option><option>Startup</option></select></label>
+          <label class="campo"><span>Valor mensual (USD)</span><input name="valor_mensual_usd" type="number" min="0" step="1" required /></label>
+          <label class="campo"><span>Canal</span><input name="canal" maxlength="50" required placeholder="Ticket Soporte" /></label>
+          <label class="campo ancho"><span>Comentario</span><textarea name="comentario" rows="3" maxlength="2000" required></textarea></label>
+          <p id="error-comentario" class="mensaje-error ancho" role="alert" hidden></p>
+          <button type="submit" class="boton">Clasificar y agregar</button>
+        </form>
+      </details>
+
+      <section class="tarjeta" aria-labelledby="titulo-feedback">
+        <h2 id="titulo-feedback">Comentarios clasificados</h2>
+        <div class="tabla-desplazable"><table id="tabla-feedback" class="tabla"></table></div>
+      </section>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- MÓDULO 3: INSPECTOR JSON Y COMITÉ IA                         -->
+    <!-- ============================================================ -->
+    <section id="panel-inspector" class="panel" role="tabpanel" aria-labelledby="pestana-inspector" hidden>
+      <section class="tarjeta" aria-labelledby="titulo-flujo">
+        <h2 id="titulo-flujo">Cómo se aplica la IA a la lógica de negocio</h2>
+        <ol class="flujo">
+          <li><strong>Datos</strong><span>CSV, MongoDB Atlas o PostgreSQL</span></li>
+          <li><strong>Motor de reglas</strong><span>Fórmulas financieras, clasificador y RICE en código determinista</span></li>
+          <li><strong>JSON</strong><span>Cifras exactas y agregadas, sin datos personales</span></li>
+          <li><strong>Comité IA</strong><span>CFO, CMO y COO interpretan el JSON</span></li>
+        </ol>
+        <p class="nota">La IA no calcula: interpreta cifras ya verificadas. Si recibe la pregunta sin datos, inventa números (alucinación).</p>
+      </section>
+
+      <section class="tarjeta" aria-labelledby="titulo-dictamen" id="seccion-dictamen">
+        <div class="tarjeta-cabecera">
+          <h2 id="titulo-dictamen">Dictamen del Comité IA</h2>
+          <div class="acciones">
+            <button type="button" id="btn-consultar-ia" class="boton">Consultar al Comité IA</button>
+            <button type="button" id="btn-dictamen-local" class="boton secundario">Dictamen local</button>
+          </div>
+        </div>
+        <p class="nota" id="estado-dictamen" aria-live="polite">Aún no hay dictamen. "Consultar al Comité IA" envía las entradas al servidor, que recalcula todo y consulta a OpenRouter; si la IA no responde o responde mal, contesta el motor local.</p>
+        <p class="nota alerta" id="aviso-desactualizado" hidden>Los datos cambiaron desde este dictamen. Vuelve a consultar para actualizarlo.</p>
+        <div id="dictamen" class="dictamen" hidden></div>
+      </section>
+
+      <div class="fila-dos">
+        <section class="tarjeta" aria-labelledby="titulo-payload">
+          <div class="tarjeta-cabecera">
+            <h2 id="titulo-payload">Payload JSON</h2>
+            <button type="button" class="boton secundario" data-copiar="codigo-payload">Copiar</button>
+          </div>
+          <pre id="codigo-payload" class="codigo" tabindex="0"></pre>
+        </section>
+        <section class="tarjeta" aria-labelledby="titulo-prompt">
+          <div class="tarjeta-cabecera">
+            <h2 id="titulo-prompt">Prompt del Comité</h2>
+            <button type="button" class="boton secundario" data-copiar="codigo-prompt">Copiar</button>
+          </div>
+          <pre id="codigo-prompt" class="codigo" tabindex="0"></pre>
+        </section>
+      </div>
+
+    </section>
+  </main>
+
+  <div id="aviso" class="aviso" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

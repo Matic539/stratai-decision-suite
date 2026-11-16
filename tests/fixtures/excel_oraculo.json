@@ -1,0 +1,335 @@
+{
+  "_fuente": "Ejercicio_Sencillo_Decisiones_IA.xlsx recalculado con LibreOffice Calc (motor independiente). Hoja 1_Dilema_del_Gerente.",
+  "casos": {
+    "base_excel": {
+      "entradas": {
+        "clientes": 180,
+        "precio": 250,
+        "costoOperativo": 50,
+        "churn": 0.045,
+        "organicosMes": 8,
+        "presupuesto": 18000,
+        "cac": 600
+      },
+      "opciones": {
+        "actual": {
+          "precio": 250.0,
+          "gananciaPorCliente": 200.0,
+          "clientesExtra": 0.0,
+          "ltv": 4444.0,
+          "ratioLtvCac": 7.4,
+          "clientesPorMes": [
+            180.0,
+            180.0,
+            180.0,
+            180.0,
+            180.0,
+            180.0,
+            180.0,
+            180.0,
+            180.0,
+            180.0,
+            180.0,
+            180.0
+          ],
+          "gananciaOperativa": 432000.0,
+          "gananciaNeta": 432000.0,
+          "diferenciaVsActual": 0.0
+        },
+        "A": {
+          "precio": 275.0,
+          "gananciaPorCliente": 225.0,
+          "clientesExtra": 0.0,
+          "ltv": 3462.0,
+          "ratioLtvCac": 5.8,
+          "clientesPorMes": [
+            176.0,
+            173.0,
+            170.0,
+            167.0,
+            164.0,
+            161.0,
+            159.0,
+            157.0,
+            155.0,
+            153.0,
+            151.0,
+            149.0
+          ],
+          "gananciaOperativa": 435375.0,
+          "gananciaNeta": 435375.0,
+          "diferenciaVsActual": 3375.0
+        },
+        "B": {
+          "precio": 250.0,
+          "gananciaPorCliente": 200.0,
+          "clientesExtra": 30.0,
+          "ltv": 4444.0,
+          "ratioLtvCac": 7.4,
+          "clientesPorMes": [
+            209.0,
+            208.0,
+            207.0,
+            206.0,
+            205.0,
+            204.0,
+            203.0,
+            202.0,
+            201.0,
+            200.0,
+            199.0,
+            198.0
+          ],
+          "gananciaOperativa": 488400.0,
+          "gananciaNeta": 470400.0,
+          "diferenciaVsActual": 38400.0
+        },
+        "C": {
+          "precio": 250.0,
+          "gananciaPorCliente": 200.0,
+          "clientesExtra": 0.0,
+          "ltv": 8889.0,
+          "ratioLtvCac": 14.8,
+          "clientesPorMes": [
+            184.0,
+            188.0,
+            192.0,
+            196.0,
+            200.0,
+            204.0,
+            207.0,
+            210.0,
+            213.0,
+            216.0,
+            219.0,
+            222.0
+          ],
+          "gananciaOperativa": 490200.0,
+          "gananciaNeta": 472200.0,
+          "diferenciaVsActual": 40200.0
+        }
+      },
+      "ganadorVeredicto": "C"
+    },
+    "churn6_presupuesto25k_cac800": {
+      "entradas": {
+        "clientes": 180,
+        "precio": 250,
+        "costoOperativo": 50,
+        "churn": 0.06,
+        "organicosMes": 8,
+        "presupuesto": 25000,
+        "cac": 800
+      },
+      "opciones": {
+        "actual": {
+          "precio": 250.0,
+          "gananciaPorCliente": 200.0,
+          "clientesExtra": 0.0,
+          "ltv": 3333.0,
+          "ratioLtvCac": 4.2,
+          "clientesPorMes": [
+            177.0,
+            174.0,
+            172.0,
+            170.0,
+            168.0,
+            166.0,
+            164.0,
+            162.0,
+            160.0,
+            158.0,
+            157.0,
+            156.0
+          ],
+          "gananciaOperativa": 396800.0,
+          "gananciaNeta": 396800.0,
+          "diferenciaVsActual": 0.0
+        },
+        "A": {
+          "precio": 275.0,
+          "gananciaPorCliente": 225.0,
+          "clientesExtra": 0.0,
+          "ltv": 2813.0,
+          "ratioLtvCac": 3.5,
+          "clientesPorMes": [
+            174.0,
+            168.0,
+            163.0,
+            158.0,
+            153.0,
+            149.0,
+            145.0,
+            141.0,
+            138.0,
+            135.0,
+            132.0,
+            129.0
+          ],
+          "gananciaOperativa": 401625.0,
+          "gananciaNeta": 401625.0,
+          "diferenciaVsActual": 4825.0
+        },
+        "B": {
+          "precio": 250.0,
+          "gananciaPorCliente": 200.0,
+          "clientesExtra": 31.0,
+          "ltv": 3333.0,
+          "ratioLtvCac": 4.2,
+          "clientesPorMes": [
+            206.0,
+            202.0,
+            198.0,
+            194.0,
+            190.0,
+            187.0,
+            184.0,
+            181.0,
+            178.0,
+            175.0,
+            173.0,
+            171.0
+          ],
+          "gananciaOperativa": 447800.0,
+          "gananciaNeta": 422800.0,
+          "diferenciaVsActual": 26000.0
+        },
+        "C": {
+          "precio": 250.0,
+          "gananciaPorCliente": 200.0,
+          "clientesExtra": 0.0,
+          "ltv": 6667.0,
+          "ratioLtvCac": 8.3,
+          "clientesPorMes": [
+            183.0,
+            186.0,
+            188.0,
+            190.0,
+            192.0,
+            194.0,
+            196.0,
+            198.0,
+            200.0,
+            202.0,
+            204.0,
+            206.0
+          ],
+          "gananciaOperativa": 467800.0,
+          "gananciaNeta": 442800.0,
+          "diferenciaVsActual": 46000.0
+        }
+      },
+      "ganadorVeredicto": "C"
+    },
+    "clientes300_precio180_costo40_organicos12": {
+      "entradas": {
+        "clientes": 300,
+        "precio": 180,
+        "costoOperativo": 40,
+        "churn": 0.045,
+        "organicosMes": 12,
+        "presupuesto": 18000,
+        "cac": 600
+      },
+      "opciones": {
+        "actual": {
+          "precio": 180.0,
+          "gananciaPorCliente": 140.0,
+          "clientesExtra": 0.0,
+          "ltv": 3111.0,
+          "ratioLtvCac": 5.2,
+          "clientesPorMes": [
+            299.0,
+            298.0,
+            297.0,
+            296.0,
+            295.0,
+            294.0,
+            293.0,
+            292.0,
+            291.0,
+            290.0,
+            289.0,
+            288.0
+          ],
+          "gananciaOperativa": 493080.0,
+          "gananciaNeta": 493080.0,
+          "diferenciaVsActual": 0.0
+        },
+        "A": {
+          "precio": 198.0,
+          "gananciaPorCliente": 158.0,
+          "clientesExtra": 0.0,
+          "ltv": 2431.0,
+          "ratioLtvCac": 4.1,
+          "clientesPorMes": [
+            293.0,
+            286.0,
+            279.0,
+            273.0,
+            267.0,
+            262.0,
+            257.0,
+            252.0,
+            248.0,
+            244.0,
+            240.0,
+            236.0
+          ],
+          "gananciaOperativa": 495646.0,
+          "gananciaNeta": 495646.0,
+          "diferenciaVsActual": 2566.0
+        },
+        "B": {
+          "precio": 180.0,
+          "gananciaPorCliente": 140.0,
+          "clientesExtra": 30.0,
+          "ltv": 3111.0,
+          "ratioLtvCac": 5.2,
+          "clientesPorMes": [
+            327.0,
+            324.0,
+            321.0,
+            319.0,
+            317.0,
+            315.0,
+            313.0,
+            311.0,
+            309.0,
+            307.0,
+            305.0,
+            303.0
+          ],
+          "gananciaOperativa": 527940.0,
+          "gananciaNeta": 509940.0,
+          "diferenciaVsActual": 16860.0
+        },
+        "C": {
+          "precio": 180.0,
+          "gananciaPorCliente": 140.0,
+          "clientesExtra": 0.0,
+          "ltv": 6222.0,
+          "ratioLtvCac": 10.4,
+          "clientesPorMes": [
+            305.0,
+            310.0,
+            315.0,
+            320.0,
+            325.0,
+            330.0,
+            335.0,
+            339.0,
+            343.0,
+            347.0,
+            351.0,
+            355.0
+          ],
+          "gananciaOperativa": 556500.0,
+          "gananciaNeta": 538500.0,
+          "diferenciaVsActual": 45420.0
+        }
+      },
+      "ganadorVeredicto": "C"
+    }
+  }
+}
