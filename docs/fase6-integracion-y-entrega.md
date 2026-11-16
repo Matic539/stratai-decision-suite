@@ -26,6 +26,6 @@ Recomendación: guardar las credenciales de Atlas en un gestor de contraseñas e
 
 ## Entrega
 
-- **Repositorio en GitHub** con todo lo versionado (sin `node_modules`, `.env` ni archivos de credenciales).
+- **Repositorio público en GitHub:** https://github.com/Matic539/stratai-decision-suite, con todo lo versionado (sin `node_modules`, `.env` ni archivos de credenciales). La captura de Gemini se recortó para no publicar el nombre ni el historial de chats.
 - **Archivo .zip** generado con `git archive`, que solo incluye lo que está en el repositorio. Se prueba descomprimiéndolo en otra carpeta: `npm install`, `npm test` y `npm start` en modo CSV deben funcionar sin base de datos ni llave de IA.
 - Versión `1.0.0` en `package.json`.

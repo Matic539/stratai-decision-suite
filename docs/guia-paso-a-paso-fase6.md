@@ -1,8 +1,8 @@
 # Guía paso a paso: Fase 6 (evidencias, GitHub y entrega)
 
-Esta guía completa las evidencias que faltan, publica el proyecto en GitHub y genera el .zip de entrega, comprobando que funcione en una carpeta limpia. Los comandos son para **PowerShell en Windows**.
+Esta guía completa las evidencias que faltan. La publicación en GitHub y el .zip de entrega ya están hechos (paso 3). Los comandos son para **PowerShell en Windows**.
 
-Tiempo estimado: 40 a 60 minutos.
+Tiempo estimado: 30 a 40 minutos.
 
 ---
 
@@ -99,104 +99,17 @@ Detén el servidor con `Ctrl + C`.
 
 ---
 
-## Paso 3. Revisar antes de publicar
+## Paso 3. Publicación y .zip (ya hechos)
 
-**Secretos.** Ya están excluidos por `.gitignore`: `.env`, `atlas-credentials.env` y cualquier archivo `*.env` o con "credentials" o "credenciales" en el nombre. Recomendación: pasa lo que tiene `atlas-credentials.env` a un gestor de contraseñas (por ejemplo, Bitwarden) y borra ese archivo; hoy está en texto plano dentro de OneDrive.
+El 16 de noviembre quedaron listos:
 
-**¿Repositorio público o privado?** No hay secretos en el repositorio, pero hay datos personales menores:
-- `docs/evidencias/fase1-prompt-gemini.png` muestra tu nombre y los títulos de tus chats de Gemini en la barra lateral;
-- las capturas de la Fase 4 muestran el host de tu clúster de Atlas. Sin usuario, contraseña e IP permitida no sirve para entrar, pero tampoco hace falta publicarlo.
+- **Repositorio público:** https://github.com/Matic539/stratai-decision-suite (rama `main`). Contiene 81 archivos y no incluye `.env`, `atlas-credentials.env` ni `node_modules`. La captura `fase1-prompt-gemini.png` se recortó para quitar tu nombre y el historial de Gemini; el original quedó en la carpeta `Tarea-1`, fuera del proyecto.
+- **App de Claude en GitHub:** instalada en tu cuenta con acceso **solo** a este repositorio, para poder subir los cambios. Se puede quitar en GitHub → **Settings → Applications → Installed GitHub Apps → Claude**.
+- **`Tarea-1\stratai-suite-entrega.zip`:** generado con `git archive` desde el mismo commit. Se probó descomprimido en una carpeta limpia: `npm ci` sin vulnerabilidades, 135 de 135 pruebas y el servidor en modo CSV con el dictamen local.
 
-Si el repositorio será **público**, recorta esa barra lateral (con la Herramienta Recortes o Paint) o pídeme que la recorte. Si será **privado**, no hace falta.
+Cuando termines las capturas de los pasos 1 y 2, avisa: se suben al repositorio y se vuelve a generar el .zip.
 
----
-
-## Paso 4. Crear el repositorio local con git
-
-Comprueba que git está instalado:
-
-```powershell
-git --version
-```
-
-Si no lo está: `winget install --id Git.Git -e` y abre una terminal nueva.
-
-Si nunca configuraste tu identidad en git (si ya lo hiciste, salta este bloque):
-
-```powershell
-git config --global user.name "Matías López"
-git config --global user.email "TU_ID+TU_USUARIO@users.noreply.github.com"
-```
-
-El correo `noreply` lo encuentras en GitHub → **Settings → Emails**; así tu correo personal no queda en el historial.
-
-Crea el repositorio y revisa qué se va a guardar:
-
-```powershell
-git init -b main
-git add .
-git status --short
-git check-ignore -v .env atlas-credentials.env
-```
-
-- En `git status --short` **no** deben aparecer `.env`, `atlas-credentials.env` ni `node_modules`.
-- `git check-ignore` debe mostrar la regla de `.gitignore` que excluye cada uno.
-
-Si todo está bien:
-
-```powershell
-git commit -m "StratAI Decision Suite 1.0.0: simulador, matriz RICE, Comité IA y 3 instancias (CSV, MongoDB Atlas, PostgreSQL)"
-```
-
----
-
-## Paso 5. Publicar en GitHub
-
-1. Entra a https://github.com/new
-2. **Repository name:** `stratai-decision-suite`
-3. Elige **Private** o **Public** (paso 3).
-4. **No** marques "Add a README", ".gitignore" ni "license": el proyecto ya los trae.
-5. **Create repository**.
-
-Luego, en la terminal (cambia `TU_USUARIO`):
-
-```powershell
-git remote add origin https://github.com/TU_USUARIO/stratai-decision-suite.git
-git push -u origin main
-```
-
-La primera vez se abre el navegador para iniciar sesión en GitHub.
-
-Revisa en la página del repositorio que el README se vea con sus capturas y que **no** aparezcan `.env` ni `atlas-credentials.env`.
-
-Si el repositorio es privado y tu profesor debe verlo: **Settings → Collaborators → Add people**, con su usuario de GitHub.
-
----
-
-## Paso 6. Generar el .zip de entrega
-
-```powershell
-git archive --format=zip --output "..\stratai-suite-entrega.zip" HEAD
-```
-
-El archivo queda en la carpeta `Tarea-1`. `git archive` solo incluye lo que está en el repositorio, así que no lleva `.env`, credenciales ni `node_modules`. (GitHub ofrece lo mismo en **Code → Download ZIP**.)
-
-## Paso 7. Probar el .zip como lo haría tu profesor
-
-```powershell
-$prueba = "$env:TEMP\prueba-entrega"
-if (Test-Path $prueba) { Remove-Item $prueba -Recurse -Force }
-Expand-Archive "..\stratai-suite-entrega.zip" $prueba
-cd $prueba
-npm install
-npm test
-copy .env.example .env
-npm start
-```
-
-Abre http://127.0.0.1:3000: debe decir **Instancia 1 · CSV** e **IA: dictamen local**, y las 3 pestañas deben funcionar sin base de datos ni llave. Detén el servidor con `Ctrl + C` y vuelve a tu carpeta con el comando del paso 0.
-
-📸 **Evidencia opcional:** `npm test` en la carpeta de prueba → `docs/evidencias/fase6-2-zip-limpio.png`. Si la agregas, haz `git add .`, `git commit -m "Evidencia del zip limpio"` y `git push`, y vuelve a generar el .zip.
+Recomendación de seguridad: pasa lo que tiene `atlas-credentials.env` a un gestor de contraseñas (por ejemplo, Bitwarden) y borra ese archivo; hoy está en texto plano dentro de OneDrive.
 
 ---
 
@@ -204,6 +117,6 @@ Abre http://127.0.0.1:3000: debe decir **Instancia 1 · CSV** e **IA: dictamen l
 
 - [ ] Evidencias completas en `docs/evidencias/` (fase3, fase4-1 a fase4-6, fase5-1 a fase5-8 y fase6-1)
 - [ ] `DB_MODE=csv` en tu `.env` local
-- [ ] Repositorio en GitHub sin secretos
-- [ ] `stratai-suite-entrega.zip` probado en una carpeta limpia
+- [x] Repositorio en GitHub sin secretos
+- [x] `stratai-suite-entrega.zip` probado en una carpeta limpia (se regenera al agregar las capturas)
 - [ ] Enlace al repositorio y .zip enviados según lo que pida el ramo
