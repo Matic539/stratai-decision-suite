@@ -99,7 +99,7 @@ Las instancias 2 y 3 se verificaron además contra servidores reales.
 5. **El redondeo depende de la tecnología:** `$round` de MongoDB y `ROUND` sobre `double precision` redondean al par, y en PostgreSQL `entero / 100` da 0. Las tres instancias coinciden solo porque se fijó "mitad hacia arriba" en cada una.
 6. **La semilla SQL de la guía no salía de los datos:** alcance fijo, 5 de 12 clientes y C-102 clasificado a mano en ERP.
 7. **Los modelos gratuitos cambian a diario:** uno dejó de ser gratuito y otros respondían vacío por quedarse sin tokens razonando. Por eso hay varios modelos en orden y un dictamen local.
-8. **La recomendación de la IA no es estable:** dos consultas con los mismos datos priorizaron iniciativas distintas, y el verificador comprueba el origen de las cifras, no la lógica. El dictamen es un insumo para el comité, no la decisión.
+8. **La recomendación de la IA no es estable:** con los mismos datos, una consulta priorizó Precios y otras dos, hechas después de ajustar el prompt, priorizaron Reportes. El verificador comprueba el origen de las cifras, no la lógica. El dictamen es un insumo para el comité, no la decisión.
 9. **La normalización se nota en el desafío 11:** una fila en PostgreSQL contra todos los documentos de C-103 en MongoDB.
 
 ## Seguridad
@@ -145,10 +145,15 @@ En [`docs/evidencias/`](docs/evidencias/), con el nombre de la fase y el paso de
 |---|---|
 | `fase1-prompt-gemini.png`, `fase1-veredicto-gemini.txt` | Prompt de la hoja 3 del Excel en Gemini y su respuesta |
 | `fase3-respaldo-local.png` | Dictamen local cuando los modelos gratuitos fallaron |
-| `fase3-dictamen-ia.png` | Dictamen de la IA en la Instancia 1 |
-| `fase4-1` a `fase4-6` | Carga en Atlas, documento en `feedbacks`, verificación en la app, desafío 10, dictamen guardado y colección `simulaciones` |
-| `fase5-1` a `fase5-8` | Esquema, carga, verificación en la app, dictamen guardado, simulaciones en psql y desafío 11 (psql, app y script) |
-| `fase6-1-comparar.png` | `npm run comparar` con las 3 instancias |
+| `fase3-dictamen-ia.png` | Dictamen de la IA en la Instancia 1 (CSV) |
+| `fase4-1-carga-atlas.png` | Verificación en Atlas con los 2 criterios, incluido el desafío 10 (orden por ingreso en riesgo) |
+| `fase4-2-atlas-feedbacks.png` | Documento de C-109 en la colección `feedbacks` |
+| `fase4-3-app-coincide-atlas.png` | App en la Instancia 2: la matriz coincide con la del pipeline |
+| `fase4-5-dictamen-guardado.png`, `fase4-6-atlas-simulaciones.png` | Dictamen guardado en Atlas y el documento en `simulaciones` |
+| `fase5-1-esquema.png`, `fase5-2-carga-postgres.png` | Creación del esquema y carga con verificación |
+| `fase5-4-dictamen-guardado.png`, `fase5-5-simulaciones-psql.png` | Dictamen guardado en PostgreSQL y su fila en `simulaciones_estrategicas` |
+| `fase5-6-desafio11-psql.png`, `fase5-8-desafio11-script.png`, `fase5-9-restauracion-c103.png` | Desafío 11 en psql y con el script, y restauración del valor original |
+| `fase6-1-comparar.png` | `npm run comparar`: las 3 instancias dan la misma matriz |
 
 ## Referencia
 

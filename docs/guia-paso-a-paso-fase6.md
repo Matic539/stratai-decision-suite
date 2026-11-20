@@ -115,7 +115,7 @@ Recomendación de seguridad: pasa lo que tiene `atlas-credentials.env` a un gest
 
 ## Lista de entrega
 
-- [ ] Evidencias completas en `docs/evidencias/` (fase3, fase4-1 a fase4-6, fase5-1 a fase5-8 y fase6-1)
+- [x] Evidencias en `docs/evidencias/` (índice en el README)
 - [ ] `DB_MODE=csv` en tu `.env` local
 - [x] Repositorio en GitHub sin secretos
 - [x] `stratai-suite-entrega.zip` probado en una carpeta limpia (se regenera al agregar las capturas)
